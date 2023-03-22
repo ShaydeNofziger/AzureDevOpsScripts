@@ -197,7 +197,7 @@ function Invoke-CascadeTags {
         [string[]]$Tags = $WorkItem.fields | Select-Object -ExpandProperty 'System.Tags' | ForEach-Object { $PSItem.split('; ') }
         $Tags = $Tags | Where-Object -FilterScript { $_ -notlike 'CascadeTags' }
         if ($null -eq $Tags -or ($Tags.Length -eq 0)) { continue }
-        Get-AzureDevOpsChildItems -OrganizationName 'shayde' -ProjectName 'Personal Projects' -WorkItemId $WorkItem.WorkItemId -PersonalAccessToken $PersonalAccessToken | Add-TagToWorkItem -OrganizationName 'shayde' -ProjectName 'Personal Projects' -PersonalAccessToken $PersonalAccessToken -TagName $Tags
+        Get-AzureDevOpsChildItems -OrganizationName $OrganizationName -ProjectName $ProjectName -WorkItemId $WorkItem.WorkItemId -PersonalAccessToken $PersonalAccessToken | Add-TagToWorkItem -OrganizationName 'shayde' -ProjectName 'Personal Projects' -PersonalAccessToken $PersonalAccessToken -TagName $Tags
     }    
 
 }
